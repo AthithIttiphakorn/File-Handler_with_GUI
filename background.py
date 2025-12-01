@@ -10,6 +10,8 @@ import shutil
 
 def moveFile( source, dest ):
     print(f'Moving {source} -> {dest}')
+    if os.path.isdir(dest): #Prevent overwriting directory
+        dest = os.path.join( dest, os.path.basename(source) )
 
     try:
         shutil.move(source, dest)
@@ -28,9 +30,9 @@ class DownloadHandler(FileSystemEventHandler):
             newFile = event.src_path
             print(f"✅ New file downloaded: {newFile}")
             time.sleep(0.5)
-            
+            db_path = os.path.join(Path(__file__).resolve().parent, "database.db") #Make dictionary path absolute and in same folder as this script.
             with shelve.open("database") as db:
-                if "keywords" not in db:
+                if "keywords" not in db: #check if db has been created yet.
                     db["keywords"] = []
                 for i in db['keywords']:
                     if i in str(newFile):
