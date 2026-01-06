@@ -6,5 +6,5 @@
   - File organization runs automtically when the windows device is opened
 
 ## How to use:
-  - After downloading, configure your file organizing options using the exe.
+  - After downloading the exe file on this repository, configure your file organizing options using the exe.
   - You may need to restart the computer to make it run automatically everytime
